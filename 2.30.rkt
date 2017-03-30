@@ -1,0 +1,22 @@
+#lang racket
+(define (square x) (* x x))
+(define (square-list list)
+  (if (null? list)
+      '()
+      (if (pair?  list)
+          (cons (square-list (car list)) (square-list (cdr list)))
+          (square list))
+   ))
+(square-list (list 1 (list 2 (list 3 4) 5) (list 6 7)))
+
+(define (map proc list)
+  (if (null? list)
+      '()
+      (if (pair? list)
+          (cons (map proc (car list)) (map proc (cdr list)))
+          (square list))
+      
+   ))
+(define (square-map-list list)
+  (map (lambda (x) (* x x)) list))
+(square-map-list (list 1 (list 2 (list 3 4) 5) (list 6 7)))
